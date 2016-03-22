@@ -1,21 +1,32 @@
 package com.sharukhhasan.handshake.activities;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.GraphRequest;
+import com.sharukhhasan.handshake.PreferenceUtils;
 import com.sharukhhasan.handshake.R;
 
+import com.sharukhhasan.handshake.User;
 import com.squareup.seismic.ShakeDetector;
 
 public class MainActivity extends AppCompatActivity implements ShakeDetector.Listener{
     private ImageButton pastShakesBtn;
     private ImageButton settingsBtn;
+    private ImageView appIcon;
     private TextView welcomeTextView;
+    private TextView waitingShakeTextView;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,10 +34,36 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        currentUser = PreferenceUtils.getCurrentUser(getApplicationContext());
+
         pastShakesBtn = (ImageButton) findViewById(R.id.pastShakesButton);
+        pastShakesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, PastshakesActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         settingsBtn = (ImageButton) findViewById(R.id.settingsButton);
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        appIcon = (ImageView) findViewById(R.id.handshakeIcon);
+        waitingShakeTextView = (TextView) findViewById(R.id.waitingShakeTextView);
+
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-        welcomeTextView.setText();
+        String welcome = "Welcome, " + currentUser.userFirstName + "!";
+        welcomeTextView.setText(welcome);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         ShakeDetector sd = new ShakeDetector(this);
@@ -36,6 +73,13 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
 
     public void hearShake()
     {
-        Toast.makeText(this, "Don't shake me, bro!", Toast.LENGTH_SHORT).show();
+        Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+        waitingShakeTextView.setText("Searching for people...");
+        welcomeTextView.startAnimation(shake);
+        pastShakesBtn.startAnimation(shake);
+        settingsBtn.startAnimation(shake);
+        appIcon.startAnimation(shake);
+
+        //Toast.makeText(this, "Don't shake me, bro!", Toast.LENGTH_SHORT).show();
     }
 }

@@ -33,4 +33,5 @@ dependencies {
     compile 'com.squareup:seismic:1.0.2'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.android.support:support-v4:23.2.0'
 }

@@ -14,4 +14,5 @@ public class User {
     public String userFacebookLink;
     public String userLinkedinName;
     public String userPicture;
+    public String userFacebookId;
 }

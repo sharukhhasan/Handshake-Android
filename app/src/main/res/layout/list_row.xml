@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:src="@drawable/facebook"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Sharukh Hasan"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/emailBtn" />
+
+
+    <ImageButton
+        android:id="@+id/emailBtn"
+        android:src="@drawable/emailmdpi"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/linkedinBtn"
+        android:layout_toStartOf="@+id/linkedinBtn" />
+
+    <ImageButton
+        android:id="@+id/linkedinBtn"
+        android:src="@drawable/linkedinmdpi"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/fbBtn"
+        android:layout_toStartOf="@+id/fbBtn" />
+
+    <ImageButton
+        android:id="@+id/fbBtn"
+        android:src="@drawable/facebookmdpi"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="31dp"
+        android:layout_marginEnd="31dp" />
+
+</RelativeLayout>
