@@ -19,25 +19,28 @@
         android:gravity="center"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:text="Welcome!" />
+        android:text="Welcome, Sharukh!"
+        android:textSize="24dp" />
 
     <ImageButton
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/settingsButton"
-        android:src="@drawable/settings"
+        android:src="@drawable/settings_med"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="#136BEF" />
 
     <ImageButton
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/pastShakesButton"
-        android:src="@drawable/settings"
+        android:src="@drawable/pastshakes_med"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="#136BEF" />
 
     <ImageView
         android:layout_width="240dp"

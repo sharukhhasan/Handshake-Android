@@ -81,6 +81,10 @@ public class LoginActivity extends AppCompatActivity {
 
                         });
 
+                Log.d(TAG, user.userFirstName);
+                Log.d(TAG, user.userEmail);
+                Log.d(TAG, user.userFacebookId);
+                Log.d(TAG, user.userFacebookLink);
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id, firstName, lastName, email");
                 request.setParameters(parameters);
