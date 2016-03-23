@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
 import com.sharukhhasan.handshake.activities.LoginActivity;
 import com.sharukhhasan.handshake.activities.MainActivity;
 
@@ -16,6 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_splash);
 
         appTitle = (TextView) findViewById(R.id.handshakeTitle);

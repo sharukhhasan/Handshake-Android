@@ -2,6 +2,8 @@ package com.sharukhhasan.handshake.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.sharukhhasan.handshake.R;
+
 
 public class PastshakesActivity extends AppCompatActivity {
 

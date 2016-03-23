@@ -22,6 +22,7 @@ import com.sharukhhasan.handshake.R;
 import com.sharukhhasan.handshake.User;
 
 public class LoginActivity extends AppCompatActivity {
+    public static final String TAG = "LoginActivity";
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     User user;
@@ -30,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login);
 
         if(PreferenceUtils.getCurrentUser(LoginActivity.this) != null)
@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e("response: ", response + "");
                                 try {
                                     user = new User();
-                                    user.userFirstName = object.getString("firstName").toString();
-                                    user.userLastName = object.getString("lastName").toString();
+                                    user.userFirstName = object.getString("first_name").toString();
+                                    user.userLastName = object.getString("last_name").toString();
                                     user.userEmail = object.getString("email").toString();
                                     user.userFacebookLink = object.getString("linkUri").toString();
                                     user.userFacebookId = object.getString("id").toString();

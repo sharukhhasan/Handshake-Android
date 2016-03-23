@@ -18,7 +18,8 @@
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:textColor="#ffffff"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:text="Welcome!" />
 
     <ImageButton
         android:layout_width="40dp"
@@ -33,7 +34,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/pastShakesButton"
-        android:src="@drawable/pastshakes"
+        android:src="@drawable/settings"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

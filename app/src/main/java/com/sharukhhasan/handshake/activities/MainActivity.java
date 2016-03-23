@@ -1,7 +1,5 @@
 package com.sharukhhasan.handshake.activities;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +10,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sharukhhasan.handshake.PreferenceUtils;
 import com.sharukhhasan.handshake.R;
@@ -62,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         waitingShakeTextView = (TextView) findViewById(R.id.waitingShakeTextView);
 
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-        String welcome = "Welcome, " + currentUser.userFirstName + "!";
-        welcomeTextView.setText(welcome);
+        //String welcome = "Welcome, " + currentUser.userFirstName + "!";
+        //welcomeTextView.setText(welcome);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         ShakeDetector sd = new ShakeDetector(this);
@@ -75,11 +72,30 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
     {
         Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
         waitingShakeTextView.setText("Searching for people...");
+        waitingShakeTextView.startAnimation(shake);
         welcomeTextView.startAnimation(shake);
         pastShakesBtn.startAnimation(shake);
         settingsBtn.startAnimation(shake);
         appIcon.startAnimation(shake);
 
-        //Toast.makeText(this, "Don't shake me, bro!", Toast.LENGTH_SHORT).show();
+        Thread txtChangeThread = new Thread(){
+            @Override
+            public void run()
+            {
+                try{
+                    Thread.sleep(5000);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run()
+                        {
+                            waitingShakeTextView.setText("Waiting for handshake...");
+                        }
+                    });
+                } catch(InterruptedException e) {
+
+                }
+            }
+        };
+        txtChangeThread.start();
     }
 }
