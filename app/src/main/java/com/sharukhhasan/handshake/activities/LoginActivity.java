@@ -13,6 +13,8 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";
     private CallbackManager callbackManager;
     private LoginButton loginButton;
+    ProfileTracker profileTracker;
     User user;
 
     @Override
@@ -64,17 +67,13 @@ public class LoginActivity extends AppCompatActivity {
                                     user.setUserFacebookId(jsonObject.getString("id"));
                                     user.setUserPictureURL(new URL("https://graph.facebook.com/" + user.userFacebookId + "/picture?type=large"));
 
-                                    URL image_url = user.getUserPictureURL();
-                                    user.setUserPicture(BitmapFactory.decodeStream(image_url.openConnection().getInputStream()));
+                                    //URL image_url = user.getUserPictureURL();
+                                    //user.setUserPicture(BitmapFactory.decodeStream(image_url.openConnection().getInputStream()));
 
                                     PreferenceUtils.setCurrentUser(user, LoginActivity.this);
 
                                     Log.d(TAG, user.userName);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                } catch (MalformedURLException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
+                                } catch (JSONException | MalformedURLException e) {
                                     e.printStackTrace();
                                 }
 
@@ -102,18 +101,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         if(PreferenceUtils.getCurrentUser(LoginActivity.this) != null)
         {
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(homeIntent);
             finish();
         }
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
     }
 
     @Override

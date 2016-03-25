@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.Profile;
 import com.sharukhhasan.handshake.PreferenceUtils;
 import com.sharukhhasan.handshake.R;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
     private TextView welcomeTextView;
     private TextView waitingShakeTextView;
     private User currentUser;
+    private Profile profile = Profile.getCurrentProfile();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         setContentView(R.layout.activity_main);
 
         currentUser = PreferenceUtils.getCurrentUser(getApplicationContext());
+
+        String usrname = profile.getFirstName();
 
         pastShakesBtn = (ImageButton) findViewById(R.id.pastShakesButton);
         pastShakesBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
 
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
         String[] splitName = currentUser.userName.split("\\s+");
-        String welcome = "Welcome, " + splitName[0] + "!";
+        String welcome = "Welcome, " + usrname + "!";
         welcomeTextView.setText(welcome);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);

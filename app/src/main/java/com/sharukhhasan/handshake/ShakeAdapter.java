@@ -72,7 +72,7 @@ public class ShakeAdapter extends ArrayAdapter<User>
                 emailIntent.setType("text/plain");
                 emailIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{user.getUserEmail()});
-                context.startActivity();
+                context.startActivity(emailIntent);
             }
         });
 
