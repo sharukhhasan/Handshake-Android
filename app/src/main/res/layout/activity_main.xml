@@ -19,8 +19,8 @@
         android:gravity="center"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:text="Welcome, Sharukh!"
-        android:textSize="24dp" />
+        android:textSize="24dp"
+        android:text="Welcome" />
 
     <ImageButton
         android:layout_width="40dp"

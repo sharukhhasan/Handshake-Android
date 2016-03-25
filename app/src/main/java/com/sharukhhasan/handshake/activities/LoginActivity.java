@@ -1,5 +1,6 @@
 package com.sharukhhasan.handshake.activities;
 
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,11 +16,16 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.sharukhhasan.handshake.PreferenceUtils;
 import com.sharukhhasan.handshake.R;
 import com.sharukhhasan.handshake.User;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";
@@ -33,19 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if(PreferenceUtils.getCurrentUser(LoginActivity.this) != null)
-        {
-            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(homeIntent);
-            finish();
-        }
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-
         loginButton = (LoginButton) findViewById(R.id.facebook_login_button);
         loginButton.setReadPermissions("public_profile, email");
 
@@ -58,35 +51,40 @@ public class LoginActivity extends AppCompatActivity {
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
-                            public void onCompleted(JSONObject object, GraphResponse response)
+                            public void onCompleted(final JSONObject object, GraphResponse response)
                             {
-                                Log.e("response: ", response + "");
+                                Log.v("LoginActivity", response.toString());
+
+                                final JSONObject jsonObject = response.getJSONObject();
+
                                 try {
                                     user = new User();
-                                    user.userFirstName = object.getString("first_name").toString();
-                                    user.userLastName = object.getString("last_name").toString();
-                                    user.userEmail = object.getString("email").toString();
-                                    user.userFacebookLink = object.getString("linkUri").toString();
-                                    user.userFacebookId = object.getString("id").toString();
+                                    user.setUserName(jsonObject.getString("name"));
+                                    user.setUserEmail(jsonObject.getString("email"));
+                                    user.setUserFacebookId(jsonObject.getString("id"));
+                                    user.setUserPictureURL(new URL("https://graph.facebook.com/" + user.userFacebookId + "/picture?type=large"));
+
+                                    URL image_url = user.getUserPictureURL();
+                                    user.setUserPicture(BitmapFactory.decodeStream(image_url.openConnection().getInputStream()));
+
                                     PreferenceUtils.setCurrentUser(user, LoginActivity.this);
 
-                                } catch (Exception e) {
+                                    Log.d(TAG, user.userName);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                } catch (MalformedURLException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
                                     e.printStackTrace();
                                 }
 
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
+                                Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(homeIntent);
                                 finish();
                             }
-
                         });
-
-                Log.d(TAG, user.userFirstName);
-                Log.d(TAG, user.userEmail);
-                Log.d(TAG, user.userFacebookId);
-                Log.d(TAG, user.userFacebookLink);
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id, firstName, lastName, email");
+                parameters.putString("fields", "id,name,email");
                 request.setParameters(parameters);
                 request.executeAsync();
             }
@@ -94,16 +92,28 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCancel()
             {
-                Toast.makeText(LoginActivity.this, "User cancelled", Toast.LENGTH_SHORT).show();
+                Log.v("LoginActivity", "cancel");
             }
 
             @Override
-            public void onError(FacebookException e)
+            public void onError(FacebookException exception)
             {
-                Toast.makeText(LoginActivity.this, "Error on Login, check your facebook app_id", Toast.LENGTH_LONG).show();
+                Log.v("LoginActivity", exception.getCause().toString());
             }
-
         });
+
+        if(PreferenceUtils.getCurrentUser(LoginActivity.this) != null)
+        {
+            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(homeIntent);
+            finish();
+        }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
     }
 
     @Override

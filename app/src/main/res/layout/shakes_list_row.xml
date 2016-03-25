@@ -7,18 +7,18 @@
 
 
     <ImageView
-        android:id="@+id/list_image"
+        android:id="@+id/profile_image"
         android:layout_width="63dp"
         android:layout_height="63dp"
         android:src="@drawable/facebook"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/nameTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Sharukh Hasan"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/list_image" />
+        android:layout_toRightOf="@id/profile_image" />
 
 
     <ImageButton

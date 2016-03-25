@@ -21,7 +21,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         appTitle = (TextView) findViewById(R.id.handshakeTitle);
-        appTitle.setTextSize(49);
 
         Thread timerThread = new Thread(){
             public void run()

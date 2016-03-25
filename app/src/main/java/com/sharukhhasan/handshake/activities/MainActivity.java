@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         waitingShakeTextView = (TextView) findViewById(R.id.waitingShakeTextView);
 
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-        String welcome = "Welcome, " + currentUser.userFirstName + "!";
+        String[] splitName = currentUser.userName.split("\\s+");
+        String welcome = "Welcome, " + splitName[0] + "!";
         welcomeTextView.setText(welcome);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
