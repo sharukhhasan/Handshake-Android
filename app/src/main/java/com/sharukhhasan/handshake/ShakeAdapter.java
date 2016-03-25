@@ -63,7 +63,7 @@ public class ShakeAdapter extends ArrayAdapter<User>
 
         View row = inflater.inflate(R.layout.shakes_list_row, parent, false);
 
-        ImageButton emailButton = (ImageButton) row.findViewById(R.id.emailBtn);
+        holder.email = (ImageButton) row.findViewById(R.id.emailBtn);
         emailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -135,6 +135,9 @@ public class ShakeAdapter extends ArrayAdapter<User>
     static class ViewHolder {
         TextView user_name;
         ImageView userImg;
+        ImageButton email;
+        ImageButton facebook;
+        ImageButton linkedin;
 
         void populate(User user, Context context)
         {

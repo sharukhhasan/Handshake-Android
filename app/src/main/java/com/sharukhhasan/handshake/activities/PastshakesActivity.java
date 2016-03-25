@@ -29,7 +29,7 @@ public class PastshakesActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pastshakes);
-        
+
         currentUser = PreferenceUtils.getCurrentUser(getApplicationContext());
 
         emailBtn = (ImageButton) findViewById(R.id.emailBtn);
