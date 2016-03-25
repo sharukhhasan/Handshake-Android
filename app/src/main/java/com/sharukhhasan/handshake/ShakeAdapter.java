@@ -58,13 +58,13 @@ public class ShakeAdapter extends ArrayAdapter<User>
     @Override
     public View getView(final int position, View convertView, ViewGroup parent)
     {
-        ViewHolder holder;
+        ViewHolder holder = null;
         final User user = userList.get(position);
 
         View row = inflater.inflate(R.layout.shakes_list_row, parent, false);
 
         holder.email = (ImageButton) row.findViewById(R.id.emailBtn);
-        emailButton.setOnClickListener(new View.OnClickListener() {
+        holder.email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -76,8 +76,8 @@ public class ShakeAdapter extends ArrayAdapter<User>
             }
         });
 
-        ImageButton linkedinButton = (ImageButton) row.findViewById(R.id.linkedinBtn);
-        linkedinButton.setOnClickListener(new View.OnClickListener() {
+        holder.linkedin = (ImageButton) row.findViewById(R.id.linkedinBtn);
+        holder.linkedin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -86,11 +86,10 @@ public class ShakeAdapter extends ArrayAdapter<User>
             }
         });
 
-        ImageButton facebookButton = (ImageButton) row.findViewById(R.id.fbBtn);
-        facebookButton.setOnClickListener(new View.OnClickListener() {
+        holder.facebook = (ImageButton) row.findViewById(R.id.fbBtn);
+        holder.facebook.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 try {
                     // Check if FB app is even installed
                     context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
@@ -98,7 +97,7 @@ public class ShakeAdapter extends ArrayAdapter<User>
                     String facebookScheme = "fb://profile/" + user.getUserFacebookId();
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(facebookScheme));
                     context.startActivity(intent);
-                } catch(Exception e) {
+                } catch (Exception e) {
 
                     // Cache and Open a url in browser
                     String facebookProfileUri = "https://www.facebook.com/" + user.getUserFacebookId();
