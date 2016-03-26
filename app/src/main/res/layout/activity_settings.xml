@@ -1,17 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_title"
+        android:id="@+id/settingsTitle"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="24dp"
+        android:layout_alignBottom="@+id/doneButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_done_title"
+        android:id="@+id/doneButton"
+        android:layout_gravity="right"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/tableLayout"
+        android:layout_alignEnd="@+id/tableLayout" />
+
     <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableLayout"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
         <TableRow
             android:id="@+id/firstNameRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp" >
+            android:layout_margin="10dp">
 
             <TextView
                 android:id="@+id/firstNameTxtView"
@@ -25,20 +52,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:inputType="textPersonName"
+                android:singleLine="true" />
 
             <Switch
-                android:layout_width="51dp"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/firstNameSwitch"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:checked="true" />
 
         </TableRow>
         <TableRow
             android:id="@+id/lastNameRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp" >
+            android:layout_margin="10dp" >
 
             <TextView
                 android:id="@+id/lastNameTextView"
@@ -52,20 +82,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:inputType="textPersonName"
+                android:singleLine="true" />
 
             <Switch
-                android:layout_width="51dp"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/lastNameSwitch"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:checked="true" />
 
         </TableRow>
         <TableRow
             android:id="@+id/emailRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp" >
+            android:layout_margin="10dp" >
 
             <TextView
                 android:id="@+id/emailTextView"
@@ -79,11 +112,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:inputType="textEmailAddress"
+                android:singleLine="true" />
 
             <Switch
-                android:layout_width="51dp"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/emailSwitch"
                 android:layout_gravity="center"/>
 
@@ -92,7 +127,7 @@
             android:id="@+id/phoneNumberRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp" >
+            android:layout_margin="10dp" >
 
             <TextView
                 android:id="@+id/phoneNumberTextView"
@@ -106,11 +141,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:inputType="phone"
+                android:singleLine="true" />
 
             <Switch
-                android:layout_width="51dp"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/phoneNumberSwitch"
                 android:layout_gravity="center"/>
 
@@ -119,7 +156,7 @@
             android:id="@+id/companyRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp" >
+            android:layout_margin="10dp" >
 
             <TextView
                 android:id="@+id/companyTextView"
@@ -133,11 +170,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:singleLine="true" />
 
             <Switch
-                android:layout_width="51dp"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/companySwitch"
                 android:layout_gravity="center"/>
 
@@ -146,7 +184,7 @@
             android:id="@+id/facebookLinkRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp" >
+            android:layout_margin="10dp" >
 
             <TextView
                 android:id="@+id/facebookLinkTextView"
@@ -160,11 +198,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:singleLine="true" />
 
             <Switch
-                android:layout_width="51dp"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/facebookLinkSwitch"
                 android:layout_gravity="center"/>
 
@@ -173,7 +212,7 @@
             android:id="@+id/linkedInNameRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp" >
+            android:layout_margin="10dp" >
 
             <TextView
                 android:id="@+id/linkedInTextView"
@@ -187,14 +226,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:singleLine="true" />
 
             <Switch
-                android:layout_width="51dp"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/linkedInSwitch"
                 android:layout_gravity="center"/>
 
         </TableRow>
     </TableLayout>
-</LinearLayout>
+</RelativeLayout>

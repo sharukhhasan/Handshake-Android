@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
 
         currentUser = PreferenceUtils.getCurrentUser(getApplicationContext());
 
-        String usrname = profile.getFirstName();
+        currentUser.setUserFacebookLink("fb://profile/" + currentUser.getUserFacebookId());
+
+        //String usrname = profile.getFirstName();
 
         pastShakesBtn = (ImageButton) findViewById(R.id.pastShakesButton);
         pastShakesBtn.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
 
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
         String[] splitName = currentUser.userName.split("\\s+");
-        String welcome = "Welcome, " + usrname + "!";
+        String welcome = "Welcome, " + splitName[0] + "!";
         welcomeTextView.setText(welcome);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
