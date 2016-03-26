@@ -20,7 +20,8 @@ public class ComplexPreferences {
     Type typeOfObject = new TypeToken<Object>() {
     }.getType();
 
-    private ComplexPreferences(Context context, String namePreferences, int mode) {
+    private ComplexPreferences(Context context, String namePreferences, int mode)
+    {
         this.context = context;
         if (namePreferences == null || namePreferences.equals("")) {
             namePreferences = "complex_preferences";

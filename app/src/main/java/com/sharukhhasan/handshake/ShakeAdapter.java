@@ -20,11 +20,12 @@ import java.util.List;
 
 
 /**
- * Created by Sharukh on 1/27/16.
+ * Created by Sharukh on 2/27/16.
  */
 public class ShakeAdapter extends ArrayAdapter<User>
 {
     List<User> userList = new ArrayList<User>();
+
     Context context;
     LayoutInflater inflater;
     String picImgURL;

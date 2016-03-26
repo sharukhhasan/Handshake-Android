@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
 
         currentUser.setUserFacebookLink("fb://profile/" + currentUser.getUserFacebookId());
 
-        //String usrname = profile.getFirstName();
-
         pastShakesBtn = (ImageButton) findViewById(R.id.pastShakesButton);
         pastShakesBtn.setOnClickListener(new View.OnClickListener() {
             @Override

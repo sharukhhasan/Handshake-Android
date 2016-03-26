@@ -1,5 +1,6 @@
 package com.sharukhhasan.handshake.activities;
 
+import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 import com.sharukhhasan.handshake.PreferenceUtils;
 import com.sharukhhasan.handshake.R;
+import com.sharukhhasan.handshake.SharedPreference;
 import com.sharukhhasan.handshake.User;
 
 import java.io.IOException;
@@ -33,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";
     private CallbackManager callbackManager;
     private LoginButton loginButton;
+    private SharedPreference sharedPreference;
+    AppCompatActivity context = this;
     ProfileTracker profileTracker;
     User user;
 
@@ -41,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sharedPreference = new SharedPreference();
 
         loginButton = (LoginButton) findViewById(R.id.facebook_login_button);
         loginButton.setReadPermissions("public_profile, email");
@@ -67,7 +73,12 @@ public class LoginActivity extends AppCompatActivity {
                                     user.setUserFacebookId(jsonObject.getString("id"));
                                     user.setUserPictureURL(new URL("https://graph.facebook.com/" + user.userFacebookId + "/picture?type=large"));
 
+                                    sharedPreference.save(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
+                                    sharedPreference.save(context, SharedPreference.EMAIL_KEY, jsonObject.getString("email"));
+                                    sharedPreference.save(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
+                                    sharedPreference.save(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
                                     //URL image_url = user.getUserPictureURL();
+
                                     //user.setUserPicture(BitmapFactory.decodeStream(image_url.openConnection().getInputStream()));
 
                                     PreferenceUtils.setCurrentUser(user, LoginActivity.this);
