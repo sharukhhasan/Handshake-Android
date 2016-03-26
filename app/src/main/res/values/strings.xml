@@ -4,4 +4,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="first_name_settings">First Name</string>
+    <string name="last_name_settings">Last Name</string>
+    <string name="email_settings">Email</string>
+    <string name="phone_number_settings">Phone Number</string>
+    <string name="company_settings">Company</string>
+    <string name="facebook_link_settings">Facebook Link</string>
+    <string name="linkedin_name_settings">LinkedIn Name</string>
+
 </resources>

@@ -16,7 +16,6 @@
         android:id="@+id/nameTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Sharukh Hasan"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/profile_image" />
 

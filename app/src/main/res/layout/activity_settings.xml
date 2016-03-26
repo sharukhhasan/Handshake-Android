@@ -1,14 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:divider="#b5b5b5"
-        android:dividerHeight="1dp" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
+        <TableRow
+            android:id="@+id/firstNameRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" >
+
+            <TextView
+                android:id="@+id/firstNameTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/first_name_settings"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/firstNameEditView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="#ffffff" />
+
+            <Switch
+                android:layout_width="51dp"
+                android:layout_height="31dp"
+                android:id="@+id/firstNameSwitch"
+                android:layout_gravity="center"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/lastNameRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" >
+
+            <TextView
+                android:id="@+id/lastNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/last_name_settings"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/lastNameEditView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="#ffffff" />
+
+            <Switch
+                android:layout_width="51dp"
+                android:layout_height="31dp"
+                android:id="@+id/lastNameSwitch"
+                android:layout_gravity="center"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/emailRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" >
+
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email_settings"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="#ffffff" />
+
+            <Switch
+                android:layout_width="51dp"
+                android:layout_height="31dp"
+                android:id="@+id/emailSwitch"
+                android:layout_gravity="center"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/phoneNumberRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" >
+
+            <TextView
+                android:id="@+id/phoneNumberTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_number_settings"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/phoneNumberEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="#ffffff" />
+
+            <Switch
+                android:layout_width="51dp"
+                android:layout_height="31dp"
+                android:id="@+id/phoneNumberSwitch"
+                android:layout_gravity="center"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/companyRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" >
+
+            <TextView
+                android:id="@+id/companyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/company_settings"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/companyEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="#ffffff" />
+
+            <Switch
+                android:layout_width="51dp"
+                android:layout_height="31dp"
+                android:id="@+id/companySwitch"
+                android:layout_gravity="center"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/facebookLinkRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" >
+
+            <TextView
+                android:id="@+id/facebookLinkTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/facebook_link_settings"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/facebookLinkEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="#ffffff" />
+
+            <Switch
+                android:layout_width="51dp"
+                android:layout_height="31dp"
+                android:id="@+id/facebookLinkSwitch"
+                android:layout_gravity="center"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/linkedInNameRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" >
+
+            <TextView
+                android:id="@+id/linkedInTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/linkedin_name_settings"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/linkedInEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="#ffffff" />
+
+            <Switch
+                android:layout_width="51dp"
+                android:layout_height="31dp"
+                android:id="@+id/linkedInSwitch"
+                android:layout_gravity="center"/>
+
+        </TableRow>
+    </TableLayout>
 </LinearLayout>
