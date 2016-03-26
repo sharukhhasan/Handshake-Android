@@ -75,8 +75,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                     sharedPreference.save(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
                                     sharedPreference.save(context, SharedPreference.EMAIL_KEY, jsonObject.getString("email"));
-                                    sharedPreference.save(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
-                                    sharedPreference.save(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
+                                    sharedPreference.save(context, SharedPreference.FACEBOOK_ID_KEY, jsonObject.getString("id"));
+                                    sharedPreference.save(context, SharedPreference.FACEBOOK_PIC_URL_KEY, "https://graph.facebook.com/" + user.userFacebookId + "/picture?type=large");
                                     //URL image_url = user.getUserPictureURL();
 
                                     //user.setUserPicture(BitmapFactory.decodeStream(image_url.openConnection().getInputStream()));

@@ -15,6 +15,7 @@ public class SharedPreference {
     public static final String LAST_NAME_KEY = "USER_LAST_NAME";
     public static final String EMAIL_KEY = "USER_EMAIL";
     public static final String FACEBOOK_ID_KEY = "USER_FACEBOOK_ID_KEY";
+    public static final String FACEBOOK_PIC_URL_KEY = "USER_PICTURE_KEY";
     public static final String PHONE_NUMBER_KEY = "USER_PHONE_NUMBER";
     public static final String COMPANY_KEY = "USER_COMPANY";
     public static final String FACEBOOK_LINK_KEY = "USER_FACEBOOK_LINK";
@@ -49,6 +50,9 @@ public class SharedPreference {
             case FACEBOOK_ID_KEY:
                 editor.putString(FACEBOOK_ID_KEY, text);
                 break;
+            case FACEBOOK_PIC_URL_KEY:
+                editor.putString(FACEBOOK_PIC_URL_KEY, text);
+                break;
             case PHONE_NUMBER_KEY:
                 editor.putString(PHONE_NUMBER_KEY, text);
                 break;
@@ -82,12 +86,15 @@ public class SharedPreference {
                 break;
             case LAST_NAME_KEY:
                 text = settings.getString(LAST_NAME_KEY, null);
-                break:
+                break;
             case EMAIL_KEY:
                 text = settings.getString(EMAIL_KEY, null);
                 break;
             case FACEBOOK_ID_KEY:
                 text = settings.getString(FACEBOOK_ID_KEY, null);
+                break;
+            case FACEBOOK_PIC_URL_KEY:
+                text = settings.getString(FACEBOOK_PIC_URL_KEY, null);
                 break;
             case PHONE_NUMBER_KEY:
                 text = settings.getString(PHONE_NUMBER_KEY, null);
@@ -141,6 +148,10 @@ public class SharedPreference {
                 break;
             case FACEBOOK_ID_KEY:
                 editor.remove(FACEBOOK_ID_KEY);
+                break;
+            case FACEBOOK_PIC_URL_KEY:
+                editor.remove(FACEBOOK_PIC_URL_KEY);
+                break;
             case PHONE_NUMBER_KEY:
                 editor.remove(PHONE_NUMBER_KEY);
                 break;

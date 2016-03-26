@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.facebook.Profile;
 import com.sharukhhasan.handshake.PreferenceUtils;
 import com.sharukhhasan.handshake.R;
+import com.sharukhhasan.handshake.SharedPreference;
 import com.sharukhhasan.handshake.User;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -22,6 +23,8 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText company;
     private EditText facebookLink;
     private EditText linkedinName;
+    private SharedPreference sharedPreference;
+    AppCompatActivity context = this;
 
     /*private Switch firstNameSwitch;
     private Switch lastNameSwitch;
@@ -40,6 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         Profile currentUser = Profile.getCurrentProfile();
         User user = PreferenceUtils.getCurrentUser(getApplicationContext());
+        sharedPreference = new SharedPreference();
 
         firstName = (EditText) findViewById(R.id.firstNameEditView);
         firstName.setText(currentUser.getFirstName());
@@ -50,6 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = firstName.getText().toString();
+                    sharedPreference.save(context, SharedPreference.FIRST_NAME_KEY, change);
                     firstName.setText(change);
                 }
             }
@@ -64,6 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = lastName.getText().toString();
+                    sharedPreference.save(context, SharedPreference.LAST_NAME_KEY, change);
                     lastName.setText(change);
                 }
             }
@@ -77,6 +83,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = email.getText().toString();
+                    sharedPreference.save(context, SharedPreference.EMAIL_KEY, change);
                     email.setText(change);
                 }
             }
@@ -90,6 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = phoneNumber.getText().toString();
+                    sharedPreference.save(context, SharedPreference.PHONE_NUMBER_KEY, change);
                     phoneNumber.setText(change);
                 }
             }
@@ -103,6 +111,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = company.getText().toString();
+                    sharedPreference.save(context, SharedPreference.COMPANY_KEY, change);
                     company.setText(change);
                 }
             }
@@ -117,6 +126,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = facebookLink.getText().toString();
+                    sharedPreference.save(context, SharedPreference.FACEBOOK_LINK_KEY, change);
                     facebookLink.setText(change);
                 }
             }
@@ -130,6 +140,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = linkedinName.getText().toString();
+                    sharedPreference.save(context, SharedPreference.LINKEDIN_NAME_KEY, change);
                     linkedinName.setText(change);
                 }
             }
