@@ -26,7 +26,7 @@ public class SharedPreference {
         super();
     }
 
-    public void save(Context context, String key, String text)
+    public void saveText(Context context, String key, String text)
     {
         SharedPreferences settings;
         Editor editor;
@@ -43,7 +43,7 @@ public class SharedPreference {
                 break;
             case LAST_NAME_KEY:
                 editor.putString(LAST_NAME_KEY, text);
-                break:
+                break;
             case EMAIL_KEY:
                 editor.putString(EMAIL_KEY, text);
                 break;
@@ -70,10 +70,54 @@ public class SharedPreference {
         editor.commit();
     }
 
+    public void saveBool(Context context, String key, Boolean active)
+    {
+        SharedPreferences settings;
+        Editor editor;
+
+        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        editor = settings.edit();
+
+        switch(key){
+            case FULL_NAME_KEY:
+                editor.putBoolean(FULL_NAME_KEY, active);
+                break;
+            case FIRST_NAME_KEY:
+                editor.putBoolean(FIRST_NAME_KEY, active);
+                break;
+            case LAST_NAME_KEY:
+                editor.putBoolean(LAST_NAME_KEY, active);
+                break;
+            case EMAIL_KEY:
+                editor.putBoolean(EMAIL_KEY, active);
+                break;
+            case FACEBOOK_ID_KEY:
+                editor.putBoolean(FACEBOOK_ID_KEY, active);
+                break;
+            case FACEBOOK_PIC_URL_KEY:
+                editor.putBoolean(FACEBOOK_PIC_URL_KEY, active);
+                break;
+            case PHONE_NUMBER_KEY:
+                editor.putBoolean(PHONE_NUMBER_KEY, active);
+                break;
+            case COMPANY_KEY:
+                editor.putBoolean(COMPANY_KEY, active);
+                break;
+            case FACEBOOK_LINK_KEY:
+                editor.putBoolean(FACEBOOK_LINK_KEY, active);
+                break;
+            case LINKEDIN_NAME_KEY:
+                editor.putBoolean(LINKEDIN_NAME_KEY, active);
+                break;
+        }
+
+        editor.commit();
+    }
+
     public String getValue(Context context, String key)
     {
         SharedPreferences settings;
-        String text;
+        String text = null;
 
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 

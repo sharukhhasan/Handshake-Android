@@ -16,4 +16,22 @@
     <string name="facebook_link_settings">Facebook Link</string>
     <string name="linkedin_name_settings">LinkedIn Name</string>
 
+    <string-array name="profileSettings">
+        <item>First Name</item>
+        <item>Last Name</item>
+        <item>Email</item>
+        <item>Phone Number</item>
+        <item>Company</item>
+        <item>Facebook Link</item>
+        <item>LinkedIn Name</item>
+    </string-array>
+
+    <string name="firstNameKey">USER_FIRST_NAME</string>
+    <string name="lastNameKey">USER_LAST_NAME</string>
+    <string name="emailKey">USER_EMAIL</string>
+    <string name="phoneNumKey">USER_PHONE_NUMBER</string>
+    <string name="companyKey">USER_COMPANY</string>
+    <string name="facebookLinkKey">USER_FACEBOOK_LINK</string>
+    <string name="linkedinNameKey">USER_LINKEDIN_NAME</string>
+
 </resources>

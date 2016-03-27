@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -23,6 +24,10 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText company;
     private EditText facebookLink;
     private EditText linkedinName;
+    private Button doneButton;
+
+    private com.rey.material.widget.Switch[] settingsSwitches = new com.rey.material.widget.Switch[]
+
     private SharedPreference sharedPreference;
     AppCompatActivity context = this;
 
@@ -49,12 +54,10 @@ public class SettingsActivity extends AppCompatActivity {
         firstName.setText(currentUser.getFirstName());
         firstName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus)
-            {
-                if(!hasFocus)
-                {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
                     String change = firstName.getText().toString();
-                    sharedPreference.save(context, SharedPreference.FIRST_NAME_KEY, change);
+                    sharedPreference.saveText(context, SharedPreference.FIRST_NAME_KEY, change);
                     firstName.setText(change);
                 }
             }
@@ -64,12 +67,10 @@ public class SettingsActivity extends AppCompatActivity {
         lastName.setText(currentUser.getLastName());
         lastName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus)
-            {
-                if(!hasFocus)
-                {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
                     String change = lastName.getText().toString();
-                    sharedPreference.save(context, SharedPreference.LAST_NAME_KEY, change);
+                    sharedPreference.saveText(context, SharedPreference.LAST_NAME_KEY, change);
                     lastName.setText(change);
                 }
             }
@@ -83,7 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = email.getText().toString();
-                    sharedPreference.save(context, SharedPreference.EMAIL_KEY, change);
+                    sharedPreference.saveText(context, SharedPreference.EMAIL_KEY, change);
                     email.setText(change);
                 }
             }
@@ -97,7 +98,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = phoneNumber.getText().toString();
-                    sharedPreference.save(context, SharedPreference.PHONE_NUMBER_KEY, change);
+                    sharedPreference.saveText(context, SharedPreference.PHONE_NUMBER_KEY, change);
                     phoneNumber.setText(change);
                 }
             }
@@ -111,7 +112,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = company.getText().toString();
-                    sharedPreference.save(context, SharedPreference.COMPANY_KEY, change);
+                    sharedPreference.saveText(context, SharedPreference.COMPANY_KEY, change);
                     company.setText(change);
                 }
             }
@@ -121,12 +122,10 @@ public class SettingsActivity extends AppCompatActivity {
         facebookLink.setText(currentUser.getLinkUri().toString());
         facebookLink.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus)
-            {
-                if(!hasFocus)
-                {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
                     String change = facebookLink.getText().toString();
-                    sharedPreference.save(context, SharedPreference.FACEBOOK_LINK_KEY, change);
+                    sharedPreference.saveText(context, SharedPreference.FACEBOOK_LINK_KEY, change);
                     facebookLink.setText(change);
                 }
             }
@@ -140,9 +139,18 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!hasFocus)
                 {
                     String change = linkedinName.getText().toString();
-                    sharedPreference.save(context, SharedPreference.LINKEDIN_NAME_KEY, change);
+                    sharedPreference.saveText(context, SharedPreference.LINKEDIN_NAME_KEY, change);
                     linkedinName.setText(change);
                 }
+            }
+        });
+
+        doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
             }
         });
 
