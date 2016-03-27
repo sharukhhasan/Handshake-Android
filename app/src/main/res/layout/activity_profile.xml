@@ -1,255 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
 
     <TextView
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings_title"
-        android:id="@+id/settingsTitle"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:textColor="#ffffff"
+        android:layout_alignBaseline="@+id/delete"
+        android:layout_centerHorizontal="true"
         android:textSize="24dp"
-        android:layout_alignBottom="@+id/doneButton"
-        android:layout_centerHorizontal="true" />
+        android:textColor="#ffffff" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
+        android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings_done_title"
-        android:id="@+id/doneButton"
-        android:layout_gravity="right"
+        android:gravity="center"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/tableLayout"
-        android:layout_alignEnd="@+id/tableLayout" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
-    <TableLayout
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/profileList"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tableLayout"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
-
-        <TableRow
-            android:id="@+id/firstNameRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <TextView
-                android:id="@+id/firstNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/first_name_settings"
-                android:textColor="#ffffff" />
-
-            <EditText
-                android:id="@+id/firstNameEditView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="#ffffff"
-                android:inputType="textPersonName"
-                android:singleLine="true" />
-
-            <com.rey.material.widget.Switch
-                style="@style/Material.Widget.Switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/firstNameSwitch"
-                android:gravity="center"
-                android:checked="false"/>
-
-        </TableRow>
-        <TableRow
-            android:id="@+id/lastNameRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp" >
-
-            <TextView
-                android:id="@+id/lastNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/last_name_settings"
-                android:textColor="#ffffff" />
-
-            <EditText
-                android:id="@+id/lastNameEditView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="#ffffff"
-                android:inputType="textPersonName"
-                android:singleLine="true" />
-
-            <com.rey.material.widget.Switch
-                style="@style/Material.Widget.Switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/lastNameSwitch"
-                android:gravity="center"
-                android:checked="false"/>
-
-        </TableRow>
-        <TableRow
-            android:id="@+id/emailRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp" >
-
-            <TextView
-                android:id="@+id/emailTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/email_settings"
-                android:textColor="#ffffff" />
-
-            <EditText
-                android:id="@+id/emailEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="#ffffff"
-                android:inputType="textEmailAddress"
-                android:singleLine="true" />
-
-            <com.rey.material.widget.Switch
-                style="@style/Material.Widget.Switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/emailSwitch"
-                android:gravity="center"
-                android:checked="false"/>
-
-        </TableRow>
-        <TableRow
-            android:id="@+id/phoneNumberRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp" >
-
-            <TextView
-                android:id="@+id/phoneNumberTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/phone_number_settings"
-                android:textColor="#ffffff" />
-
-            <EditText
-                android:id="@+id/phoneNumberEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="#ffffff"
-                android:inputType="phone"
-                android:singleLine="true" />
-
-            <com.rey.material.widget.Switch
-                style="@style/Material.Widget.Switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/phoneNumberSwitch"
-                android:gravity="center"
-                android:checked="false"/>
-
-        </TableRow>
-        <TableRow
-            android:id="@+id/companyRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp" >
-
-            <TextView
-                android:id="@+id/companyTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/company_settings"
-                android:textColor="#ffffff" />
-
-            <EditText
-                android:id="@+id/companyEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="#ffffff"
-                android:singleLine="true" />
-
-            <com.rey.material.widget.Switch
-                style="@style/Material.Widget.Switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/companySwitch"
-                android:gravity="center"
-                android:checked="false"/>
-
-        </TableRow>
-        <TableRow
-            android:id="@+id/facebookLinkRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp" >
-
-            <TextView
-                android:id="@+id/facebookLinkTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/facebook_link_settings"
-                android:textColor="#ffffff" />
-
-            <EditText
-                android:id="@+id/facebookLinkEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="#ffffff"
-                android:singleLine="true" />
-
-            <com.rey.material.widget.Switch
-                style="@style/Material.Widget.Switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/facebookLinkSwitch"
-                android:gravity="center"
-                android:checked="false"/>
-
-        </TableRow>
-        <TableRow
-            android:id="@+id/linkedInNameRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp" >
-
-            <TextView
-                android:id="@+id/linkedInTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/linkedin_name_settings"
-                android:textColor="#ffffff" />
-
-            <EditText
-                android:id="@+id/linkedInEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="#ffffff"
-                android:singleLine="true" />
-
-            <com.rey.material.widget.Switch
-                style="@style/Material.Widget.Switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/linkedInSwitch"
-                android:gravity="center"
-                android:checked="false"/>
-
-        </TableRow>
-
-    </TableLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/delete" />
 
 </RelativeLayout>

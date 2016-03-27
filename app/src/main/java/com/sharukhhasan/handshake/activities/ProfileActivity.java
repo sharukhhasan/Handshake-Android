@@ -107,7 +107,6 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         public void onFocusChange(View v, boolean hasFocus)
         {
-
             if(!hasFocus)
             {
                 String change = email.getText().toString();
@@ -122,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         public void onClick(View v)
         {
-
+            v.get
         }
     };
 }
