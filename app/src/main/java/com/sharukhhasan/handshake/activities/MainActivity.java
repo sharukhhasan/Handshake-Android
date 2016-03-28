@@ -15,6 +15,7 @@ import com.facebook.Profile;
 import com.sharukhhasan.handshake.PreferenceUtils;
 import com.sharukhhasan.handshake.R;
 
+import com.sharukhhasan.handshake.SharedPreference;
 import com.sharukhhasan.handshake.User;
 import com.squareup.seismic.ShakeDetector;
 
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
     private TextView welcomeTextView;
     private TextView waitingShakeTextView;
     private User currentUser;
-    private Profile profile = Profile.getCurrentProfile();
+    private SharedPreference sharedPreference;
+    private AppCompatActivity context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,6 +36,15 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         setContentView(R.layout.activity_main);
 
         currentUser = PreferenceUtils.getCurrentUser(getApplicationContext());
+
+        sharedPreference = new SharedPreference();
+        String[] splitName = currentUser.userName.split("\\s+");
+
+        if(sharedPreference.isFirstLogin())
+        {
+            sharedPreference.saveText(context, SharedPreference.FIRST_NAME_KEY, splitName[0]);
+            sharedPreference.saveText(context, SharedPreference.LAST_NAME_KEY, splitName[1]);
+        }
 
         currentUser.setUserFacebookLink("fb://profile/" + currentUser.getUserFacebookId());
 
@@ -63,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         waitingShakeTextView = (TextView) findViewById(R.id.waitingShakeTextView);
 
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-        String[] splitName = currentUser.userName.split("\\s+");
         String welcome = "Welcome, " + splitName[0] + "!";
         welcomeTextView.setText(welcome);
 

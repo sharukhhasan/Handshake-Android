@@ -8,7 +8,6 @@ import android.content.SharedPreferences.Editor;
  * Created by Sharukh on 3/26/16.
  */
 public class SharedPreference {
-
     public static final String PREFS_NAME = "USER_PREFS";
     public static final String FULL_NAME_KEY = "USER_FULL_NAME";
     public static final String FIRST_NAME_KEY = "USER_FIRST_NAME";
@@ -21,9 +20,22 @@ public class SharedPreference {
     public static final String FACEBOOK_LINK_KEY = "USER_FACEBOOK_LINK";
     public static final String LINKEDIN_NAME_KEY = "USER_LINKEDIN_NAME";
 
+    public static boolean firstLogin = true;
+
     public SharedPreference()
     {
         super();
+    }
+
+    public boolean isFirstLogin()
+    {
+        if(firstLogin)
+        {
+            firstLogin = false;
+            return true;
+        }
+
+        return false;
     }
 
     public void saveText(Context context, String key, String text)
@@ -155,6 +167,49 @@ public class SharedPreference {
         }
 
         return text;
+    }
+
+    public boolean getBool(Context context, String key)
+    {
+        SharedPreferences settings;
+        boolean checked = false;
+
+        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        switch(key){
+            case FULL_NAME_KEY:
+                checked = settings.getBoolean(FULL_NAME_KEY, Boolean.parseBoolean(null));
+                break;
+            case FIRST_NAME_KEY:
+                checked = settings.getBoolean(FIRST_NAME_KEY, Boolean.parseBoolean(null));
+                break;
+            case LAST_NAME_KEY:
+                checked = settings.getBoolean(LAST_NAME_KEY, Boolean.parseBoolean(null));
+                break;
+            case EMAIL_KEY:
+                checked = settings.getBoolean(EMAIL_KEY, Boolean.parseBoolean(null));
+                break;
+            case FACEBOOK_ID_KEY:
+                checked = settings.getBoolean(FACEBOOK_ID_KEY, Boolean.parseBoolean(null));
+                break;
+            case FACEBOOK_PIC_URL_KEY:
+                checked = settings.getBoolean(FACEBOOK_PIC_URL_KEY, Boolean.parseBoolean(null));
+                break;
+            case PHONE_NUMBER_KEY:
+                checked = settings.getBoolean(PHONE_NUMBER_KEY, Boolean.parseBoolean(null));
+                break;
+            case COMPANY_KEY:
+                checked = settings.getBoolean(COMPANY_KEY, Boolean.parseBoolean(null));
+                break;
+            case FACEBOOK_LINK_KEY:
+                checked = settings.getBoolean(FACEBOOK_LINK_KEY, Boolean.parseBoolean(null));
+                break;
+            case LINKEDIN_NAME_KEY:
+                checked = settings.getBoolean(LINKEDIN_NAME_KEY, Boolean.parseBoolean(null));
+                break;
+        }
+
+        return checked;
     }
 
     public void clearSharedPreference(Context context)
