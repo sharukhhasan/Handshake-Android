@@ -33,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity {
             R.id.linkedInSwitch
     };
 
-    private static final String[] FIELD_KEYS = {
+    /*private static final String[] FIELD_KEYS = {
             SharedPreference.FIRST_NAME_KEY,
             SharedPreference.LAST_NAME_KEY,
             SharedPreference.EMAIL_KEY,
@@ -41,7 +41,13 @@ public class SettingsActivity extends AppCompatActivity {
             SharedPreference.COMPANY_KEY,
             SharedPreference.FACEBOOK_LINK_KEY,
             SharedPreference.LINKEDIN_NAME_KEY
-    };
+    };*/
+
+    private static final String[] EDIT_FIELD_KEYS = SharedPreference.SETTINGS_KEYS;
+    private static final String[] SWITCH_KEYS = SharedPreference.SWITCH_KEYS;
+
+    private EditText[] fields;
+    private Switch[] switches;
 
     private SharedPreference sharedPreference;
     private AppCompatActivity context = this;
@@ -55,7 +61,21 @@ public class SettingsActivity extends AppCompatActivity {
 
         sharedPreference = new SharedPreference();
 
-        EditText firstName = (EditText) findViewById(R.id.firstNameEditView);
+        fields = new EditText[EDIT_FIELD_KEYS.length];
+        switches = new Switch[SWITCH_KEYS.length];
+
+        for(int i = 0; i < fields.length; i++)
+        {
+            fields[i] = (EditText) findViewById(EDITVIEW_IDS[i]);
+            fields[i].setText(sharedPreference.getValue(context, EDIT_FIELD_KEYS[i]));
+            fields[i].setOnFocusChangeListener(focusChangeListener);
+
+            switches[i] = (Switch) findViewById(SWITCH_IDS[i]);
+            switches[i].setChecked(sharedPreference.getBool(context, SWITCH_KEYS[i]));
+            switches[i].setOnClickListener(switchListener);
+        }
+
+        /*EditText firstName = (EditText) findViewById(R.id.firstNameEditView);
         firstName.setText(sharedPreference.getValue(context, SharedPreference.FIRST_NAME_KEY));
         firstName.setOnFocusChangeListener(focusChangeListener);
 
@@ -109,7 +129,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         Switch linkedinNameSwitch = (Switch) findViewById(R.id.linkedInSwitch);
         linkedinNameSwitch.setChecked(sharedPreference.getBool(context, SharedPreference.LINKEDIN_NAME_KEY));
-        linkedinNameSwitch.setOnClickListener(switchListener);
+        linkedinNameSwitch.setOnClickListener(switchListener);*/
 
         Button doneButton = (Button) findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +154,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(id == EDITVIEW_IDS[i])
                 {
                     String change = ((EditText) v).getText().toString();
-                    sharedPreference.saveText(context, FIELD_KEYS[i], change);
+                    sharedPreference.saveText(context, EDIT_FIELD_KEYS[i], change);
                 }
             }
         }
@@ -151,7 +171,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(id == SWITCH_IDS[i])
                 {
                     boolean switched = ((Switch) v).isChecked();
-                    sharedPreference.saveBool(context, FIELD_KEYS[i], switched);
+                    sharedPreference.saveBool(context, SWITCH_KEYS[i], switched);
                 }
             }
         }

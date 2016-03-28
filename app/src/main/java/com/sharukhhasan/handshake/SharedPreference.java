@@ -8,13 +8,33 @@ import android.content.SharedPreferences.Editor;
  * Created by Sharukh on 3/26/16.
  */
 public class SharedPreference {
+    public static final String[] SETTINGS_KEYS = {
+            "USER_FIRST_NAME",
+            "USER_LAST_NAME",
+            "USER_EMAIL",
+            "USER_PHONE_NUMBER",
+            "USER_COMPANY",
+            "USER_FACEBOOK_LINK",
+            "USER_LINKEDIN_NAME"
+    };
+
+    public static final String[] SWITCH_KEYS = {
+            "SHOW_FIRST_NAME",
+            "SHOW_LAST_NAME",
+            "SHOW_EMAIL",
+            "SHOW_PHONE_NUMBER",
+            "SHOW_COMPANY",
+            "SHOW_FACEBOOK_LINK",
+            "SHOW_LINKEDIN_NAME"
+    };
+
     public static final String PREFS_NAME = "USER_PREFS";
     public static final String FULL_NAME_KEY = "USER_FULL_NAME";
     public static final String FIRST_NAME_KEY = "USER_FIRST_NAME";
     public static final String LAST_NAME_KEY = "USER_LAST_NAME";
     public static final String EMAIL_KEY = "USER_EMAIL";
-    public static final String FACEBOOK_ID_KEY = "USER_FACEBOOK_ID_KEY";
-    public static final String FACEBOOK_PIC_URL_KEY = "USER_PICTURE_KEY";
+    public static final String FACEBOOK_ID_KEY = "USER_FACEBOOK_ID";
+    public static final String FACEBOOK_PIC_URL_KEY = "USER_PICTURE";
     public static final String PHONE_NUMBER_KEY = "USER_PHONE_NUMBER";
     public static final String COMPANY_KEY = "USER_COMPANY";
     public static final String FACEBOOK_LINK_KEY = "USER_FACEBOOK_LINK";
@@ -46,43 +66,18 @@ public class SharedPreference {
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         editor = settings.edit();
 
-        switch(key){
-            case FULL_NAME_KEY:
-                editor.putString(FULL_NAME_KEY, text);
-                break;
-            case FIRST_NAME_KEY:
-                editor.putString(FIRST_NAME_KEY, text);
-                break;
-            case LAST_NAME_KEY:
-                editor.putString(LAST_NAME_KEY, text);
-                break;
-            case EMAIL_KEY:
-                editor.putString(EMAIL_KEY, text);
-                break;
-            case FACEBOOK_ID_KEY:
-                editor.putString(FACEBOOK_ID_KEY, text);
-                break;
-            case FACEBOOK_PIC_URL_KEY:
-                editor.putString(FACEBOOK_PIC_URL_KEY, text);
-                break;
-            case PHONE_NUMBER_KEY:
-                editor.putString(PHONE_NUMBER_KEY, text);
-                break;
-            case COMPANY_KEY:
-                editor.putString(COMPANY_KEY, text);
-                break;
-            case FACEBOOK_LINK_KEY:
-                editor.putString(FACEBOOK_LINK_KEY, text);
-                break;
-            case LINKEDIN_NAME_KEY:
-                editor.putString(LINKEDIN_NAME_KEY, text);
-                break;
+        for(String field : SETTINGS_KEYS)
+        {
+            if(field.equals(key))
+            {
+                editor.putString(field, text);
+                editor.commit();
+            }
         }
 
-        editor.commit();
     }
 
-    public void saveBool(Context context, String key, Boolean active)
+    public void saveBool(Context context, String key, Boolean isActive)
     {
         SharedPreferences settings;
         Editor editor;
@@ -90,81 +85,24 @@ public class SharedPreference {
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         editor = settings.edit();
 
-        switch(key){
-            case FULL_NAME_KEY:
-                editor.putBoolean(FULL_NAME_KEY, active);
-                break;
-            case FIRST_NAME_KEY:
-                editor.putBoolean(FIRST_NAME_KEY, active);
-                break;
-            case LAST_NAME_KEY:
-                editor.putBoolean(LAST_NAME_KEY, active);
-                break;
-            case EMAIL_KEY:
-                editor.putBoolean(EMAIL_KEY, active);
-                break;
-            case FACEBOOK_ID_KEY:
-                editor.putBoolean(FACEBOOK_ID_KEY, active);
-                break;
-            case FACEBOOK_PIC_URL_KEY:
-                editor.putBoolean(FACEBOOK_PIC_URL_KEY, active);
-                break;
-            case PHONE_NUMBER_KEY:
-                editor.putBoolean(PHONE_NUMBER_KEY, active);
-                break;
-            case COMPANY_KEY:
-                editor.putBoolean(COMPANY_KEY, active);
-                break;
-            case FACEBOOK_LINK_KEY:
-                editor.putBoolean(FACEBOOK_LINK_KEY, active);
-                break;
-            case LINKEDIN_NAME_KEY:
-                editor.putBoolean(LINKEDIN_NAME_KEY, active);
-                break;
+        for(String show : SWITCH_KEYS)
+        {
+            if(show.equals(key))
+            {
+                editor.putBoolean(show, isActive);
+                editor.commit();
+            }
         }
 
-        editor.commit();
     }
 
     public String getValue(Context context, String key)
     {
         SharedPreferences settings;
-        String text = null;
 
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
-        switch(key){
-            case FULL_NAME_KEY:
-                text = settings.getString(FULL_NAME_KEY, null);
-                break;
-            case FIRST_NAME_KEY:
-                text = settings.getString(FIRST_NAME_KEY, null);
-                break;
-            case LAST_NAME_KEY:
-                text = settings.getString(LAST_NAME_KEY, null);
-                break;
-            case EMAIL_KEY:
-                text = settings.getString(EMAIL_KEY, null);
-                break;
-            case FACEBOOK_ID_KEY:
-                text = settings.getString(FACEBOOK_ID_KEY, null);
-                break;
-            case FACEBOOK_PIC_URL_KEY:
-                text = settings.getString(FACEBOOK_PIC_URL_KEY, null);
-                break;
-            case PHONE_NUMBER_KEY:
-                text = settings.getString(PHONE_NUMBER_KEY, null);
-                break;
-            case COMPANY_KEY:
-                text = settings.getString(COMPANY_KEY, null);
-                break;
-            case FACEBOOK_LINK_KEY:
-                text = settings.getString(FACEBOOK_LINK_KEY, null);
-                break;
-            case LINKEDIN_NAME_KEY:
-                text = settings.getString(LINKEDIN_NAME_KEY, null);
-                break;
-        }
+        String text = settings.getString(key, null);
 
         return text;
     }
@@ -172,42 +110,10 @@ public class SharedPreference {
     public boolean getBool(Context context, String key)
     {
         SharedPreferences settings;
-        boolean checked = false;
 
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
-        switch(key){
-            case FULL_NAME_KEY:
-                checked = settings.getBoolean(FULL_NAME_KEY, false);
-                break;
-            case FIRST_NAME_KEY:
-                checked = settings.getBoolean(FIRST_NAME_KEY, false);
-                break;
-            case LAST_NAME_KEY:
-                checked = settings.getBoolean(LAST_NAME_KEY, false);
-                break;
-            case EMAIL_KEY:
-                checked = settings.getBoolean(EMAIL_KEY, false);
-                break;
-            case FACEBOOK_ID_KEY:
-                checked = settings.getBoolean(FACEBOOK_ID_KEY, false);
-                break;
-            case FACEBOOK_PIC_URL_KEY:
-                checked = settings.getBoolean(FACEBOOK_PIC_URL_KEY, false);
-                break;
-            case PHONE_NUMBER_KEY:
-                checked = settings.getBoolean(PHONE_NUMBER_KEY, false);
-                break;
-            case COMPANY_KEY:
-                checked = settings.getBoolean(COMPANY_KEY, false);
-                break;
-            case FACEBOOK_LINK_KEY:
-                checked = settings.getBoolean(FACEBOOK_LINK_KEY, false);
-                break;
-            case LINKEDIN_NAME_KEY:
-                checked = settings.getBoolean(LINKEDIN_NAME_KEY, false);
-                break;
-        }
+        boolean checked = settings.getBoolean(key, false);
 
         return checked;
     }
@@ -232,39 +138,7 @@ public class SharedPreference {
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         editor = settings.edit();
 
-        switch(key){
-            case FULL_NAME_KEY:
-                editor.remove(FULL_NAME_KEY);
-                break;
-            case FIRST_NAME_KEY:
-                editor.remove(FIRST_NAME_KEY);
-                break;
-            case LAST_NAME_KEY:
-                editor.remove(LAST_NAME_KEY);
-                break;
-            case EMAIL_KEY:
-                editor.remove(EMAIL_KEY);
-                break;
-            case FACEBOOK_ID_KEY:
-                editor.remove(FACEBOOK_ID_KEY);
-                break;
-            case FACEBOOK_PIC_URL_KEY:
-                editor.remove(FACEBOOK_PIC_URL_KEY);
-                break;
-            case PHONE_NUMBER_KEY:
-                editor.remove(PHONE_NUMBER_KEY);
-                break;
-            case COMPANY_KEY:
-                editor.remove(COMPANY_KEY);
-                break;
-            case FACEBOOK_LINK_KEY:
-                editor.remove(FACEBOOK_LINK_KEY);
-                break;
-            case LINKEDIN_NAME_KEY:
-                editor.remove(LINKEDIN_NAME_KEY);
-                break;
-        }
-
+        editor.remove(key);
         editor.commit();
     }
 }
