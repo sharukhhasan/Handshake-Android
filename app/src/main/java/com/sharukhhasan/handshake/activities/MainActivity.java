@@ -11,12 +11,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.Profile;
-import com.sharukhhasan.handshake.PreferenceUtils;
 import com.sharukhhasan.handshake.R;
-
 import com.sharukhhasan.handshake.SharedPreference;
-import com.sharukhhasan.handshake.User;
+
 import com.squareup.seismic.ShakeDetector;
 
 public class MainActivity extends AppCompatActivity implements ShakeDetector.Listener{
@@ -25,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
     private ImageView appIcon;
     private TextView welcomeTextView;
     private TextView waitingShakeTextView;
-    private User currentUser;
     private SharedPreference sharedPreference;
     private AppCompatActivity context = this;
 
@@ -35,18 +31,7 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        currentUser = PreferenceUtils.getCurrentUser(getApplicationContext());
-
         sharedPreference = new SharedPreference();
-        String[] splitName = currentUser.userName.split("\\s+");
-
-        if(sharedPreference.isFirstLogin())
-        {
-            sharedPreference.saveText(context, SharedPreference.FIRST_NAME_KEY, splitName[0]);
-            sharedPreference.saveText(context, SharedPreference.LAST_NAME_KEY, splitName[1]);
-        }
-
-        currentUser.setUserFacebookLink("fb://profile/" + currentUser.getUserFacebookId());
 
         pastShakesBtn = (ImageButton) findViewById(R.id.pastShakesButton);
         pastShakesBtn.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         waitingShakeTextView = (TextView) findViewById(R.id.waitingShakeTextView);
 
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-        String welcome = "Welcome, " + splitName[0] + "!";
-        welcomeTextView.setText(welcome);
+        String welcomeName = sharedPreference.getValue(context, SharedPreference.FIRST_NAME_KEY);
+        welcomeTextView.setText(welcomeName);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         ShakeDetector sd = new ShakeDetector(this);

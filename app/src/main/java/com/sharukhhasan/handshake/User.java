@@ -9,6 +9,8 @@ import java.net.URL;
  */
 public class User {
     public String userName;
+    public String userFirstName;
+    public String userLastName;
     public String userEmail;
     public String userPhoneNumber;
     public String userCompany;
@@ -43,6 +45,26 @@ public class User {
 
     public String getUserEmail() {
         return userEmail;
+    }
+
+    public String getUserLastName()
+    {
+        return userLastName;
+    }
+
+    public void setUserLastName(String userLastName)
+    {
+        this.userLastName = userLastName;
+    }
+
+    public String getUserFirstName()
+    {
+        return userFirstName;
+    }
+
+    public void setUserFirstName(String userFirstName)
+    {
+        this.userFirstName = userFirstName;
     }
 
     public void setUserEmail(String userEmail) {

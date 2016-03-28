@@ -34,7 +34,7 @@ public class SharedPreference {
     public static final String LAST_NAME_KEY = "USER_LAST_NAME";
     public static final String EMAIL_KEY = "USER_EMAIL";
     public static final String FACEBOOK_ID_KEY = "USER_FACEBOOK_ID";
-    public static final String FACEBOOK_PIC_URL_KEY = "USER_PICTURE";
+    public static final String FACEBOOK_PIC_URL_KEY = "USER_PICTURE_URL";
     public static final String PHONE_NUMBER_KEY = "USER_PHONE_NUMBER";
     public static final String COMPANY_KEY = "USER_COMPANY";
     public static final String FACEBOOK_LINK_KEY = "USER_FACEBOOK_LINK";

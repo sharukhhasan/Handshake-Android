@@ -57,42 +57,49 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult)
             {
-                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(final JSONObject object, GraphResponse response)
-                            {
-                                Log.v("LoginActivity", response.toString());
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(final JSONObject object, GraphResponse response)
+                    {
+                        final JSONObject jsonObject = response.getJSONObject();
 
-                                final JSONObject jsonObject = response.getJSONObject();
+                        try {
+                            sharedPreference.saveText(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
+                            sharedPreference.saveText(context, SharedPreference.EMAIL_KEY, jsonObject.getString("email"));
+                            sharedPreference.saveText(context, SharedPreference.FACEBOOK_ID_KEY, jsonObject.getString("id"));
+                            sharedPreference.saveText(context, SharedPreference.FACEBOOK_LINK_KEY, "fb://profile/" + jsonObject.getString("id"));
+                            sharedPreference.saveText(context, SharedPreference.FACEBOOK_PIC_URL_KEY, "https://graph.facebook.com/" + user.userFacebookId + "/picture?type=large");
 
-                                try {
-                                    user = new User();
-                                    user.setUserName(jsonObject.getString("name"));
-                                    user.setUserEmail(jsonObject.getString("email"));
-                                    user.setUserFacebookId(jsonObject.getString("id"));
-                                    user.setUserPictureURL(new URL("https://graph.facebook.com/" + user.userFacebookId + "/picture?type=large"));
+                            String name = jsonObject.getString("name");
+                            String[] splitName = name.split("\\s+");
+                            sharedPreference.saveText(context, SharedPreference.FIRST_NAME_KEY, splitName[0]);
+                            sharedPreference.saveText(context, SharedPreference.LAST_NAME_KEY, splitName[1]);
 
-                                    sharedPreference.saveText(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
-                                    sharedPreference.saveText(context, SharedPreference.EMAIL_KEY, jsonObject.getString("email"));
-                                    sharedPreference.saveText(context, SharedPreference.FACEBOOK_ID_KEY, jsonObject.getString("id"));
-                                    sharedPreference.saveText(context, SharedPreference.FACEBOOK_PIC_URL_KEY, "https://graph.facebook.com/" + user.userFacebookId + "/picture?type=large");
-                                    //URL image_url = user.getUserPictureURL();
+                            //URL image_url = user.getUserPictureURL();
 
-                                    //user.setUserPicture(BitmapFactory.decodeStream(image_url.openConnection().getInputStream()));
+                            //user.setUserPicture(BitmapFactory.decodeStream(image_url.openConnection().getInputStream()));
 
-                                    PreferenceUtils.setCurrentUser(user, LoginActivity.this);
+                            PreferenceUtils.setCurrentUser(user, LoginActivity.this);
 
-                                    Log.d(TAG, user.userName);
-                                } catch (JSONException | MalformedURLException e) {
-                                    e.printStackTrace();
-                                }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                                Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(homeIntent);
-                                finish();
-                            }
-                        });
+                        if(sharedPreference.isFirstLogin())
+                        {
+                            Intent settingIntent = new Intent(LoginActivity.this, SettingsActivity.class);
+                            startActivity(settingIntent);
+                            finish();
+                        }
+                        else
+                        {
+                            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(homeIntent);
+                            finish();
+                        }
+                    }
+                });
+
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id,name,email");
                 request.setParameters(parameters);

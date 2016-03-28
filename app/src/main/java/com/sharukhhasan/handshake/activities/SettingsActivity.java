@@ -12,7 +12,6 @@ import com.sharukhhasan.handshake.R;
 import com.sharukhhasan.handshake.SharedPreference;
 
 public class SettingsActivity extends AppCompatActivity {
-
     private static final int[] EDITVIEW_IDS = {
             R.id.firstNameEditView,
             R.id.lastNameEditView,
@@ -32,16 +31,6 @@ public class SettingsActivity extends AppCompatActivity {
             R.id.facebookLinkSwitch,
             R.id.linkedInSwitch
     };
-
-    /*private static final String[] FIELD_KEYS = {
-            SharedPreference.FIRST_NAME_KEY,
-            SharedPreference.LAST_NAME_KEY,
-            SharedPreference.EMAIL_KEY,
-            SharedPreference.PHONE_NUMBER_KEY,
-            SharedPreference.COMPANY_KEY,
-            SharedPreference.FACEBOOK_LINK_KEY,
-            SharedPreference.LINKEDIN_NAME_KEY
-    };*/
 
     private static final String[] EDIT_FIELD_KEYS = SharedPreference.SETTINGS_KEYS;
     private static final String[] SWITCH_KEYS = SharedPreference.SWITCH_KEYS;
@@ -74,62 +63,6 @@ public class SettingsActivity extends AppCompatActivity {
             switches[i].setChecked(sharedPreference.getBool(context, SWITCH_KEYS[i]));
             switches[i].setOnClickListener(switchListener);
         }
-
-        /*EditText firstName = (EditText) findViewById(R.id.firstNameEditView);
-        firstName.setText(sharedPreference.getValue(context, SharedPreference.FIRST_NAME_KEY));
-        firstName.setOnFocusChangeListener(focusChangeListener);
-
-        Switch firstNameSwitch = (Switch) findViewById(R.id.firstNameSwitch);
-        firstNameSwitch.setChecked(sharedPreference.getBool(context, SharedPreference.FIRST_NAME_KEY));
-        firstNameSwitch.setOnClickListener(switchListener);
-
-        EditText lastName = (EditText) findViewById(R.id.lastNameEditView);
-        lastName.setText(sharedPreference.getValue(context, SharedPreference.LAST_NAME_KEY));
-        lastName.setOnFocusChangeListener(focusChangeListener);
-
-        Switch lastNameSwitch = (Switch) findViewById(R.id.lastNameSwitch);
-        lastNameSwitch.setChecked(sharedPreference.getBool(context, SharedPreference.LAST_NAME_KEY));
-        lastNameSwitch.setOnClickListener(switchListener);
-
-        EditText email = (EditText) findViewById(R.id.emailEditText);
-        email.setText(sharedPreference.getValue(context, SharedPreference.EMAIL_KEY));
-        email.setOnFocusChangeListener(focusChangeListener);
-
-        Switch emailSwitch = (Switch) findViewById(R.id.emailSwitch);
-        emailSwitch.setChecked(sharedPreference.getBool(context, SharedPreference.EMAIL_KEY));
-        emailSwitch.setOnClickListener(switchListener);
-
-        EditText phoneNumber = (EditText) findViewById(R.id.phoneNumberEditText);
-        phoneNumber.setText(sharedPreference.getValue(context, SharedPreference.PHONE_NUMBER_KEY));
-        phoneNumber.setOnFocusChangeListener(focusChangeListener);
-
-        Switch phoneNumberSwitch = (Switch) findViewById(R.id.phoneNumberSwitch);
-        phoneNumberSwitch.setChecked(sharedPreference.getBool(context, SharedPreference.PHONE_NUMBER_KEY));
-        phoneNumberSwitch.setOnClickListener(switchListener);
-
-        EditText company = (EditText) findViewById(R.id.companyEditText);
-        company.setText(sharedPreference.getValue(context, SharedPreference.COMPANY_KEY));
-        company.setOnFocusChangeListener(focusChangeListener);
-
-        Switch companySwitch = (Switch) findViewById(R.id.companySwitch);
-        companySwitch.setChecked(sharedPreference.getBool(context, SharedPreference.COMPANY_KEY));
-        companySwitch.setOnClickListener(switchListener);
-
-        EditText facebookLink = (EditText) findViewById(R.id.facebookLinkEditText);
-        facebookLink.setText(sharedPreference.getValue(context, SharedPreference.FACEBOOK_LINK_KEY));
-        facebookLink.setOnFocusChangeListener(focusChangeListener);
-
-        Switch facebookLinkSwitch = (Switch) findViewById(R.id.facebookLinkSwitch);
-        facebookLinkSwitch.setChecked(sharedPreference.getBool(context, SharedPreference.FACEBOOK_LINK_KEY));
-        facebookLinkSwitch.setOnClickListener(switchListener);
-
-        EditText linkedinName = (EditText) findViewById(R.id.linkedInEditText);
-        linkedinName.setText(sharedPreference.getValue(context, SharedPreference.LINKEDIN_NAME_KEY));
-        linkedinName.setOnFocusChangeListener(focusChangeListener);
-
-        Switch linkedinNameSwitch = (Switch) findViewById(R.id.linkedInSwitch);
-        linkedinNameSwitch.setChecked(sharedPreference.getBool(context, SharedPreference.LINKEDIN_NAME_KEY));
-        linkedinNameSwitch.setOnClickListener(switchListener);*/
 
         Button doneButton = (Button) findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
