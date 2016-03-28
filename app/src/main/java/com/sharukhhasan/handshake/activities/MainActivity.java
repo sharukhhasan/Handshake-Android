@@ -1,7 +1,9 @@
 package com.sharukhhasan.handshake.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.SensorManager;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +33,9 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sharedPreference = new SharedPreference();
+        sharedPreference = new SharedPreference(context);
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         pastShakesBtn = (ImageButton) findViewById(R.id.pastShakesButton);
         pastShakesBtn.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +63,9 @@ public class MainActivity extends AppCompatActivity implements ShakeDetector.Lis
         waitingShakeTextView = (TextView) findViewById(R.id.waitingShakeTextView);
 
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-        String welcomeName = sharedPreference.getValue(context, SharedPreference.FIRST_NAME_KEY);
-        welcomeTextView.setText(welcomeName);
+        //String welcomeName = sharedPreference.getValue(context, SharedPreference.FIRST_NAME_KEY);
+        String welcomeName = prefs.getString(SharedPreference.FIRST_NAME_KEY, "none");
+        welcomeTextView.setText("Welcome, " + welcomeName);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         ShakeDetector sd = new ShakeDetector(this);

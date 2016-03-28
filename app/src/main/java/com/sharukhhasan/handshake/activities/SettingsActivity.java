@@ -1,8 +1,11 @@
 package com.sharukhhasan.handshake.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +15,8 @@ import com.sharukhhasan.handshake.R;
 import com.sharukhhasan.handshake.SharedPreference;
 
 public class SettingsActivity extends AppCompatActivity {
+    public static final String TAG = "Settings";
+
     private static final int[] EDITVIEW_IDS = {
             R.id.firstNameEditView,
             R.id.lastNameEditView,
@@ -39,8 +44,10 @@ public class SettingsActivity extends AppCompatActivity {
     private Switch[] switches;
 
     private SharedPreference sharedPreference;
-    private AppCompatActivity context = this;
+    AppCompatActivity context = this;
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,7 +55,12 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        sharedPreference = new SharedPreference();
+        sharedPreference = new SharedPreference(context);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
+
+        //final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         fields = new EditText[EDIT_FIELD_KEYS.length];
         switches = new Switch[SWITCH_KEYS.length];
@@ -56,11 +68,17 @@ public class SettingsActivity extends AppCompatActivity {
         for(int i = 0; i < fields.length; i++)
         {
             fields[i] = (EditText) findViewById(EDITVIEW_IDS[i]);
-            fields[i].setText(sharedPreference.getValue(context, EDIT_FIELD_KEYS[i]));
+            //Log.d(TAG, Integer.toString(i));
+            //Log.d(TAG, sharedPreference.getValue(context, SharedPreference.FIRST_NAME_KEY));
+            Log.d(TAG, Integer.toString(i));
+            Log.d(TAG, prefs.getString(EDIT_FIELD_KEYS[i], "none"));
+            fields[i].setText(prefs.getString(EDIT_FIELD_KEYS[i], "none"));
+            //fields[i].setText(sharedPreference.getValue(context, EDIT_FIELD_KEYS[i]));
             fields[i].setOnFocusChangeListener(focusChangeListener);
 
             switches[i] = (Switch) findViewById(SWITCH_IDS[i]);
-            switches[i].setChecked(sharedPreference.getBool(context, SWITCH_KEYS[i]));
+            //switches[i].setChecked(sharedPreference.getBool(context, SWITCH_KEYS[i]));
+            switches[i].setChecked(prefs.getBoolean(SWITCH_KEYS[i], false));
             switches[i].setOnClickListener(switchListener);
         }
 
@@ -87,7 +105,8 @@ public class SettingsActivity extends AppCompatActivity {
                 if(id == EDITVIEW_IDS[i])
                 {
                     String change = ((EditText) v).getText().toString();
-                    sharedPreference.saveText(context, EDIT_FIELD_KEYS[i], change);
+                    editor.putString(EDIT_FIELD_KEYS[i], change);
+                    //sharedPreference.saveText(context, EDIT_FIELD_KEYS[i], change);
                 }
             }
         }
@@ -104,7 +123,8 @@ public class SettingsActivity extends AppCompatActivity {
                 if(id == SWITCH_IDS[i])
                 {
                     boolean switched = ((Switch) v).isChecked();
-                    sharedPreference.saveBool(context, SWITCH_KEYS[i], switched);
+                    editor.putBoolean(SWITCH_KEYS[i], switched);
+                    //sharedPreference.saveBool(context, SWITCH_KEYS[i], switched);
                 }
             }
         }

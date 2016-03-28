@@ -42,9 +42,20 @@ public class SharedPreference {
 
     public static boolean firstLogin = true;
 
+    private SharedPreferences settings;
+    private Editor editor;
+    private Context context;
+
     public SharedPreference()
     {
         super();
+    }
+
+    public SharedPreference(Context context)
+    {
+        this.context = context;
+        this.settings = context.getSharedPreferences(PREFS_NAME, 0);
+        this.editor = settings.edit();
     }
 
     public boolean isFirstLogin()
@@ -60,11 +71,11 @@ public class SharedPreference {
 
     public void saveText(Context context, String key, String text)
     {
-        SharedPreferences settings;
-        Editor editor;
+        //SharedPreferences settings;
+        //Editor editor;
 
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        editor = settings.edit();
+        //settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        //editor = settings.edit();
 
         for(String field : SETTINGS_KEYS)
         {
@@ -79,11 +90,11 @@ public class SharedPreference {
 
     public void saveBool(Context context, String key, Boolean isActive)
     {
-        SharedPreferences settings;
-        Editor editor;
+        //SharedPreferences settings;
+        //Editor editor;
 
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        editor = settings.edit();
+        //settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        //editor = settings.edit();
 
         for(String show : SWITCH_KEYS)
         {
@@ -98,20 +109,20 @@ public class SharedPreference {
 
     public String getValue(Context context, String key)
     {
-        SharedPreferences settings;
+        //SharedPreferences settings;
 
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        //settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
-        String text = settings.getString(key, null);
+        String text = settings.getString(key, "nothing");
 
         return text;
     }
 
     public boolean getBool(Context context, String key)
     {
-        SharedPreferences settings;
+        //SharedPreferences settings;
 
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        //settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
         boolean checked = settings.getBoolean(key, false);
 
@@ -120,11 +131,11 @@ public class SharedPreference {
 
     public void clearSharedPreference(Context context)
     {
-        SharedPreferences settings;
-        Editor editor;
+        //SharedPreferences settings;
+        //Editor editor;
 
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        editor = settings.edit();
+        //settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        //editor = settings.edit();
 
         editor.clear();
         editor.commit();
@@ -132,11 +143,11 @@ public class SharedPreference {
 
     public void removeValue(Context context, String key)
     {
-        SharedPreferences settings;
-        Editor editor;
+        //SharedPreferences settings;
+        //Editor editor;
 
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        editor = settings.edit();
+        //settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        //editor = settings.edit();
 
         editor.remove(key);
         editor.commit();

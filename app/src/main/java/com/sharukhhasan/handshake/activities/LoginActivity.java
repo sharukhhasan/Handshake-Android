@@ -1,7 +1,9 @@
 package com.sharukhhasan.handshake.activities;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     private LoginButton loginButton;
     private SharedPreference sharedPreference;
     AppCompatActivity context = this;
-    ProfileTracker profileTracker;
-    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,7 +46,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        sharedPreference = new SharedPreference();
+        sharedPreference = new SharedPreference(context);
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editor = prefs.edit();
 
         loginButton = (LoginButton) findViewById(R.id.facebook_login_button);
         loginButton.setReadPermissions("public_profile, email");
@@ -64,16 +67,24 @@ public class LoginActivity extends AppCompatActivity {
                         final JSONObject jsonObject = response.getJSONObject();
 
                         try {
-                            sharedPreference.saveText(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
+                            editor.putString(SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
+                            editor.putString(SharedPreference.EMAIL_KEY, jsonObject.getString("email"));
+                            editor.putString(SharedPreference.FACEBOOK_ID_KEY, jsonObject.getString("id"));
+                            editor.putString(SharedPreference.FACEBOOK_LINK_KEY, "fb://profile/" + jsonObject.getString("id"));
+                            editor.putString(SharedPreference.FACEBOOK_PIC_URL_KEY, "https://graph.facebook.com/" + jsonObject.getString("id") + "/picture?type=large");
+                            /*sharedPreference.saveText(context, SharedPreference.FULL_NAME_KEY, jsonObject.getString("name"));
                             sharedPreference.saveText(context, SharedPreference.EMAIL_KEY, jsonObject.getString("email"));
                             sharedPreference.saveText(context, SharedPreference.FACEBOOK_ID_KEY, jsonObject.getString("id"));
                             sharedPreference.saveText(context, SharedPreference.FACEBOOK_LINK_KEY, "fb://profile/" + jsonObject.getString("id"));
-                            sharedPreference.saveText(context, SharedPreference.FACEBOOK_PIC_URL_KEY, "https://graph.facebook.com/" + jsonObject.getString("id") + "/picture?type=large");
+                            sharedPreference.saveText(context, SharedPreference.FACEBOOK_PIC_URL_KEY, "https://graph.facebook.com/" + jsonObject.getString("id") + "/picture?type=large");*/
 
                             String name = jsonObject.getString("name");
                             String[] splitName = name.split("\\s+");
-                            sharedPreference.saveText(context, SharedPreference.FIRST_NAME_KEY, splitName[0]);
-                            sharedPreference.saveText(context, SharedPreference.LAST_NAME_KEY, splitName[1]);
+                            editor.putString(SharedPreference.FIRST_NAME_KEY, splitName[0]);
+                            editor.putString(SharedPreference.LAST_NAME_KEY, splitName[1]);
+                            editor.apply();
+                            //sharedPreference.saveText(context, SharedPreference.FIRST_NAME_KEY, splitName[0]);
+                            //sharedPreference.saveText(context, SharedPreference.LAST_NAME_KEY, splitName[1]);
 
                             //URL image_url = user.getUserPictureURL();
 
@@ -89,6 +100,19 @@ public class LoginActivity extends AppCompatActivity {
                 parameters.putString("fields", "id,name,email");
                 request.setParameters(parameters);
                 request.executeAsync();
+
+                if(!sharedPreference.isFirstLogin())
+                {
+                    Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                }
+                else
+                {
+                    Intent settingIntent = new Intent(LoginActivity.this, SettingsActivity.class);
+                    startActivity(settingIntent);
+                    finish();
+                }
             }
 
             @Override
@@ -103,19 +127,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.v("LoginActivity", exception.getCause().toString());
             }
         });
-
-        if(sharedPreference.isFirstLogin())
-        {
-            Intent settingIntent = new Intent(LoginActivity.this, SettingsActivity.class);
-            startActivity(settingIntent);
-            finish();
-        }
-        else
-        {
-            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(homeIntent);
-            finish();
-        }
     }
 
     @Override
