@@ -178,34 +178,34 @@ public class SharedPreference {
 
         switch(key){
             case FULL_NAME_KEY:
-                checked = settings.getBoolean(FULL_NAME_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(FULL_NAME_KEY, false);
                 break;
             case FIRST_NAME_KEY:
-                checked = settings.getBoolean(FIRST_NAME_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(FIRST_NAME_KEY, false);
                 break;
             case LAST_NAME_KEY:
-                checked = settings.getBoolean(LAST_NAME_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(LAST_NAME_KEY, false);
                 break;
             case EMAIL_KEY:
-                checked = settings.getBoolean(EMAIL_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(EMAIL_KEY, false);
                 break;
             case FACEBOOK_ID_KEY:
-                checked = settings.getBoolean(FACEBOOK_ID_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(FACEBOOK_ID_KEY, false);
                 break;
             case FACEBOOK_PIC_URL_KEY:
-                checked = settings.getBoolean(FACEBOOK_PIC_URL_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(FACEBOOK_PIC_URL_KEY, false);
                 break;
             case PHONE_NUMBER_KEY:
-                checked = settings.getBoolean(PHONE_NUMBER_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(PHONE_NUMBER_KEY, false);
                 break;
             case COMPANY_KEY:
-                checked = settings.getBoolean(COMPANY_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(COMPANY_KEY, false);
                 break;
             case FACEBOOK_LINK_KEY:
-                checked = settings.getBoolean(FACEBOOK_LINK_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(FACEBOOK_LINK_KEY, false);
                 break;
             case LINKEDIN_NAME_KEY:
-                checked = settings.getBoolean(LINKEDIN_NAME_KEY, Boolean.parseBoolean(null));
+                checked = settings.getBoolean(LINKEDIN_NAME_KEY, false);
                 break;
         }
 
