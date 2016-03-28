@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,6 +19,8 @@ import java.util.List;
  * Created by Sharukh on 3/26/16.
  */
 public class ProfileActivity extends AppCompatActivity {
+    private SharedPreference sharedPreference;
+
     private static final int[] TEXTVIEW_IDS = {
             R.id.firstNameTextView,
             R.id.lastNameTextView,
@@ -64,11 +67,15 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView settingsTitle;
     private Button doneButton;
 
+    AppCompatActivity context = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        sharedPreference = new SharedPreference();
 
         settingsTitles = new ArrayList<TextView>();
         for(int id : TEXTVIEW_IDS)
@@ -94,34 +101,40 @@ public class ProfileActivity extends AppCompatActivity {
         {
             Switch _switch = (Switch) findViewById(id);
             _switch.setTag(FIELD_KEYS[keyCounter]);
-            _switch.setOnClickListener(switchListener);
+            _switch.setOnCheckedChangeListener((Switch.OnCheckedChangeListener) switchListener);
             keyCounter++;
             settingsSwitches.add(_switch);
         }
-
-
-
     }
 
     private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus)
         {
-            if(!hasFocus)
+            int id = v.getId();
+            for(int edittexts : EDITVIEW_IDS)
             {
-                String change = email.getText().toString();
-                sharedPreference.save(context, SharedPreference.EMAIL_KEY, change);
-                email.setText(change);
+                if(id == edittexts)
+                {
+                    
+                }
             }
         }
     };
 
-    private View.OnClickListener switchListener = new View.OnClickListener()
-    {
+    private CompoundButton.OnCheckedChangeListener switchListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
-        public void onClick(View v)
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
         {
-            v.get
+            String key = buttonView.getTag().toString();
+            if(isChecked)
+            {
+                sharedPreference.saveBool(context, key, true);
+            }
+            else
+            {
+                sharedPreference.saveBool(context, key, false);
+            }
         }
     };
 }

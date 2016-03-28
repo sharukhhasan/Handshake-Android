@@ -14,7 +14,7 @@
             android:layout_margin="20dp" >
 
             <TextView
-                android:id="@+id/firstNameTxtView"
+                android:id="@+id/firstNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/first_name_settings"

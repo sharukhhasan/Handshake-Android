@@ -53,6 +53,8 @@ public class SettingsAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.profile_row, parent, false);
         }
 
+        TextView textView = (TextView)
+
         return convertView;
     }
 
