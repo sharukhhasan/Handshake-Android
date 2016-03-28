@@ -31,7 +31,8 @@
 
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.PastshakesActivity"></activity>
+        <activity android:name=".activities.PastshakesActivity" />
+        <activity android:name=".activities.SocketActivity"></activity>
     </application>
 
 </manifest>

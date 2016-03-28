@@ -9,6 +9,7 @@ import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.sharukhhasan.handshake.activities.LoginActivity;
 import com.sharukhhasan.handshake.activities.MainActivity;
+import com.sharukhhasan.handshake.activities.SocketActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private TextView appTitle;
@@ -30,8 +31,13 @@ public class SplashActivity extends AppCompatActivity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    boolean loggedIn = isUserLoggedIn();
-                    if(!loggedIn)
+                    //boolean loggedIn = isUserLoggedIn();
+
+                    Intent socketIntent = new Intent(SplashActivity.this, SocketActivity.class);
+                    startActivity(socketIntent);
+                    finish();
+
+                    /*if(!loggedIn)
                     {
                         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(intent);
@@ -42,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
-                    }
+                    }*/
                 }
             }
         };
