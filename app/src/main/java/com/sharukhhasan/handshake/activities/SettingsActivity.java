@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,24 +59,16 @@ public class SettingsActivity extends AppCompatActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         editor = prefs.edit();
 
-        //final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
         fields = new EditText[EDIT_FIELD_KEYS.length];
         switches = new Switch[SWITCH_KEYS.length];
 
         for(int i = 0; i < fields.length; i++)
         {
             fields[i] = (EditText) findViewById(EDITVIEW_IDS[i]);
-            //Log.d(TAG, Integer.toString(i));
-            //Log.d(TAG, sharedPreference.getValue(context, SharedPreference.FIRST_NAME_KEY));
-            Log.d(TAG, Integer.toString(i));
-            Log.d(TAG, prefs.getString(EDIT_FIELD_KEYS[i], "none"));
-            fields[i].setText(prefs.getString(EDIT_FIELD_KEYS[i], "none"));
-            //fields[i].setText(sharedPreference.getValue(context, EDIT_FIELD_KEYS[i]));
+            fields[i].setText(prefs.getString(EDIT_FIELD_KEYS[i], ""));
             fields[i].setOnFocusChangeListener(focusChangeListener);
 
             switches[i] = (Switch) findViewById(SWITCH_IDS[i]);
-            //switches[i].setChecked(sharedPreference.getBool(context, SWITCH_KEYS[i]));
             switches[i].setChecked(prefs.getBoolean(SWITCH_KEYS[i], false));
             switches[i].setOnClickListener(switchListener);
         }
@@ -106,7 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
                 {
                     String change = ((EditText) v).getText().toString();
                     editor.putString(EDIT_FIELD_KEYS[i], change);
-                    //sharedPreference.saveText(context, EDIT_FIELD_KEYS[i], change);
+                    editor.commit();
                 }
             }
         }
@@ -124,7 +115,7 @@ public class SettingsActivity extends AppCompatActivity {
                 {
                     boolean switched = ((Switch) v).isChecked();
                     editor.putBoolean(SWITCH_KEYS[i], switched);
-                    //sharedPreference.saveBool(context, SWITCH_KEYS[i], switched);
+                    editor.commit();
                 }
             }
         }
