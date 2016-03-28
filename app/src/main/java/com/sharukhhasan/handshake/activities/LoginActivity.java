@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                             sharedPreference.saveText(context, SharedPreference.EMAIL_KEY, jsonObject.getString("email"));
                             sharedPreference.saveText(context, SharedPreference.FACEBOOK_ID_KEY, jsonObject.getString("id"));
                             sharedPreference.saveText(context, SharedPreference.FACEBOOK_LINK_KEY, "fb://profile/" + jsonObject.getString("id"));
-                            sharedPreference.saveText(context, SharedPreference.FACEBOOK_PIC_URL_KEY, "https://graph.facebook.com/" + user.userFacebookId + "/picture?type=large");
+                            sharedPreference.saveText(context, SharedPreference.FACEBOOK_PIC_URL_KEY, "https://graph.facebook.com/" + jsonObject.getString("id") + "/picture?type=large");
 
                             String name = jsonObject.getString("name");
                             String[] splitName = name.split("\\s+");
@@ -79,23 +79,8 @@ public class LoginActivity extends AppCompatActivity {
 
                             //user.setUserPicture(BitmapFactory.decodeStream(image_url.openConnection().getInputStream()));
 
-                            PreferenceUtils.setCurrentUser(user, LoginActivity.this);
-
                         } catch (JSONException e) {
                             e.printStackTrace();
-                        }
-
-                        if(sharedPreference.isFirstLogin())
-                        {
-                            Intent settingIntent = new Intent(LoginActivity.this, SettingsActivity.class);
-                            startActivity(settingIntent);
-                            finish();
-                        }
-                        else
-                        {
-                            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(homeIntent);
-                            finish();
                         }
                     }
                 });
@@ -119,8 +104,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        if(PreferenceUtils.getCurrentUser(LoginActivity.this) != null)
+        if(sharedPreference.isFirstLogin())
+        {
+            Intent settingIntent = new Intent(LoginActivity.this, SettingsActivity.class);
+            startActivity(settingIntent);
+            finish();
+        }
+        else
         {
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(homeIntent);
