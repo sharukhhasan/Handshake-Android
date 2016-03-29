@@ -1,20 +1,51 @@
 package com.sharukhhasan.handshake.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import com.sharukhhasan.handshake.io.Node;
 import com.sharukhhasan.handshake.R;
 
-public class SocketActivity extends ActionBarActivity {
+import java.util.Random;
+
+
+public class SocketActivity extends AppCompatActivity
+{
+    private TextView peersTextView;
+    private TextView framesTextView;
+
+    Node node;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_socket);
+
+        peersTextView = (TextView) findViewById(R.id.peersTextView);
+        framesTextView = (TextView) findViewById(R.id.framesTextView);
+
+        node = new Node(this);
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        node.start();
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+
+        if(node != null)
+            node.stop();
     }
 
     @Override
@@ -28,17 +59,53 @@ public class SocketActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings)
         {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private static boolean started = false;
+
+    public void sendFrames(View view)
+    {
+		/*if(!started)
+		{
+			started = true;
+			node = new Node(this);
+			node.start();
+			return;
+		}*/
+
+        node.broadcastFrame(new byte[1]);
+
+        for(int i = 0; i < 2000; ++i)
+        {
+            byte[] frameData = new byte[1024];
+            new Random().nextBytes(frameData);
+
+            node.broadcastFrame(frameData);
+        }
+
+		/*for(int i = 0; i < 100; ++i)
+		{
+			byte[] frameData = new byte[100 * 1024];
+			new Random().nextBytes(frameData);
+			node.broadcastFrame(frameData);
+		}*/
+    }
+
+    public void refreshPeers()
+    {
+        peersTextView.setText(node.getLinks().size() + " connected");
+    }
+
+    public void refreshFrames()
+    {
+        framesTextView.setText(node.getFramesCount() + " frames");
     }
 }

@@ -33,8 +33,8 @@ public class SplashActivity extends AppCompatActivity {
                 }finally{
                     //boolean loggedIn = isUserLoggedIn();
 
-                    Intent socketIntent = new Intent(SplashActivity.this, SocketActivity.class);
-                    startActivity(socketIntent);
+                    Intent intent = new Intent(SplashActivity.this, SocketActivity.class);
+                    startActivity(intent);
                     finish();
 
                     /*if(!loggedIn)

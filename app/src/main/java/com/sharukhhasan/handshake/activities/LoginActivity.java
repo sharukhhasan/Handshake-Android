@@ -1,37 +1,25 @@
 package com.sharukhhasan.handshake.activities;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.sharukhhasan.handshake.PreferenceUtils;
 import com.sharukhhasan.handshake.R;
 import com.sharukhhasan.handshake.SharedPreference;
-import com.sharukhhasan.handshake.User;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";
