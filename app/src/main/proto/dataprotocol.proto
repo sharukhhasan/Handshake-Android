@@ -6,12 +6,12 @@ option java_package = "com.sharukhhasan.proto";
 option java_outer_classname = "DataProtocol";
 
 message Person {
-  required string name = 1;
-  required int32 id = 2;
-  optional string email = 3;
-  optional string number = 4;
-  optional string fblink = 5;
-  optional string linkedinname = 6;
-  optional string picurl = 7;
-  optional string company = 8;
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
+  string number = 4;
+  string fblink = 5;
+  string linkedinname = 6;
+  string picurl = 7;
+  string company = 8;
 }

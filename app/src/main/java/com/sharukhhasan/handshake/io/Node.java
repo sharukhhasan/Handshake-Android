@@ -1,7 +1,10 @@
 package com.sharukhhasan.handshake.io;
 
+import android.util.Log;
+
 import com.sharukhhasan.handshake.activities.SocketActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Random;
@@ -14,12 +17,20 @@ import io.underdark.transport.TransportListener;
 import io.underdark.util.nslogger.NSLogger;
 import io.underdark.util.nslogger.NSLoggerAdapter;
 
-public class Node implements TransportListener
-{
+public class Node implements TransportListener {
+    private static final String TAG = "TRANSPORT_LINK";
     private boolean running;
     private SocketActivity activity;
     private long nodeId;
     private Transport transport;
+    public String fromApple;
+    public String[] fromAppleArray;
+    public String normalized;
+
+    public String name;
+    public String email;
+    public String id;
+    public String url;
 
     private ArrayList<Link> links = new ArrayList<>();
     private int framesCount = 0;
@@ -90,6 +101,36 @@ public class Node implements TransportListener
         return framesCount;
     }
 
+    public String getAppleOutput()
+    {
+        return fromApple;
+    }
+
+    public String getAppleArraySingle(int pos)
+    {
+        return fromAppleArray[pos];
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public String getUrl()
+    {
+        return url;
+    }
+
     public void broadcastFrame(byte[] frameData)
     {
         if(links.isEmpty())
@@ -99,7 +140,9 @@ public class Node implements TransportListener
         activity.refreshFrames();
 
         for(Link link : links)
+        {
             link.sendFrame(frameData);
+        }
     }
 
     //region TransportListener
@@ -134,6 +177,25 @@ public class Node implements TransportListener
     {
         ++framesCount;
         activity.refreshFrames();
+        activity.refreshApple();
+
+        try {
+            fromApple = DataProtocol.convertToString(frameData);
+            normalized = java.text.Normalizer.normalize(fromApple, java.text.Normalizer.Form.NFD);
+            name = normalized.substring(0, 13);
+            email = normalized.substring(14, 35);
+            id = normalized.substring(40, 56);
+            url = normalized.substring(59, 121);
+            Log.d(TAG, name);
+            Log.d(TAG, email);
+            Log.d(TAG, id);
+            Log.d(TAG, url);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
     //endregion
 }

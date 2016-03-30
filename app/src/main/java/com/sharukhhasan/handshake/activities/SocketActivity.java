@@ -10,13 +10,26 @@ import android.widget.TextView;
 import com.sharukhhasan.handshake.io.Node;
 import com.sharukhhasan.handshake.R;
 
+
 import java.util.Random;
 
 
 public class SocketActivity extends AppCompatActivity
 {
+    public static final String[] userInfo = {
+            "Sharukh Hasan",
+            "hasan.sharukh@gmail.com",
+            "10208508462248016",
+            "fb://profile/10208508462248016",
+            "https://graph.facebook.com/10208508462248016/picture?type=small"
+    };
+
     private TextView peersTextView;
     private TextView framesTextView;
+    private TextView nameTextView;
+    private TextView emailTextView;
+    private TextView idTextView;
+    private TextView urlTextView;
 
     Node node;
 
@@ -28,6 +41,10 @@ public class SocketActivity extends AppCompatActivity
 
         peersTextView = (TextView) findViewById(R.id.peersTextView);
         framesTextView = (TextView) findViewById(R.id.framesTextView);
+        nameTextView = (TextView) findViewById(R.id.nameTextView);
+        emailTextView = (TextView) findViewById(R.id.emailTextView);
+        idTextView = (TextView) findViewById(R.id.idTextView);
+        urlTextView = (TextView) findViewById(R.id.urlTextView);
 
         node = new Node(this);
     }
@@ -107,5 +124,13 @@ public class SocketActivity extends AppCompatActivity
     public void refreshFrames()
     {
         framesTextView.setText(node.getFramesCount() + " frames");
+    }
+
+    public void refreshApple()
+    {
+        nameTextView.setText(node.getName());
+        emailTextView.setText(node.getEmail());
+        idTextView.setText(node.getId());
+        urlTextView.setText(node.getUrl());
     }
 }
